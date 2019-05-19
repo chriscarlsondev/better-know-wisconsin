@@ -223,7 +223,6 @@ function handleQuiz() {
     renderQuizQuestion();
     checkQuizAnswer();
     renderQuizResultPage();
-    alert(QUIZQUESTIONS[0].answer);
 }
 
 // when the page loads, call `handleQuiz`
