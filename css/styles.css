@@ -1,8 +1,26 @@
 html {
     box-sizing: border-box;
-  }
-  *, *:before, *:after {
-    box-sizing: inherit;
-  }
+}
 
-  
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+input[type="radio"] {
+    margin-top: -1px;
+    vertical-align: middle;
+}
+
+.quiz-form {
+    clear: both;
+}
+
+.score-tracker {
+    float: right;
+}
+
+.question-count {
+    clear: both;
+}

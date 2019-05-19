@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Better Know Wisconsin Quiz</title>
+    <meta name="description" content="A short, 10 question quiz about the state of Wisconsin.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Better Know Wisconsin</h1>
+        <img src="./images/wisconsin-icon.png" alt="Wisconsin" width="50">
+        <section class="score-tracker">
+            <p>Current Score</p>
+            <p>5 Correct</p>
+            <p>2 Incorrect</p>
+        </section>
+    </header>
+    <main>
+        <div class="question-count">
+            <p>Question 8 of 10</p>
+        </div>
+        <h2>Question 8</h2>
+        <form class="quiz-form" action="/some-server-endpoint" method="post">
+            <fieldset>
+                <legend class="question">What is the Wisconsin state motto?</legend>
+                <input type="radio" name="answer" id="answer-a" value="a">
+                <label for="answer-a">To be, rather than to seem</label><br>
+                <input type="radio" name="answer" id="answer-b" value="b">
+                <label for="answer-b">Our liberties we prize and our rights we will maintain</label><br>
+                <input type="radio" name="answer" id="answer-c" value="c">
+                <label for="answer-c">Forward</label><br>
+                <input type="radio" name="answer" id="answer-d" value="d">
+                <label for="answer-d">State sovereignty, national union</label>
+            </fieldset>
+            <button type="submit">Submit Answer</button>
+        </form>
+    </main>
+    <footer>
+        <p>Copyright &copy; 2019. Chris Carlson. All Rights Reserved.</p>
+    </footer>
+</body>
+
+</html>
