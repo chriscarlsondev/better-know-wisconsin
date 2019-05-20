@@ -105,43 +105,53 @@ function generateQuizQuestion(questionIDToDisplay, quizQuestions) {
     return `            
             <input type="hidden" name="questionID" id="questionID" class="questionID" value="${questionIDToDisplay}">
             <fieldset>
-            <legend class="question">${displayQuestion.question}</legend>
-            <input type="radio" name="answer" id="answer-a" value="A">
+                <legend class="question">${displayQuestion.question}</legend>
+                <div class="answer-option">
+                <input type="radio" name="answer" id="answer-a" value="A">
             <label for="answer-a">${displayQuestion.optionA}</label><br>
+            </div>
+            <div class="answer-option">
             <input type="radio" name="answer" id="answer-b" value="B">
             <label for="answer-b">${displayQuestion.optionB}</label><br>
-                <input type="radio" name="answer" id="answer-c" value="C">
+            </div>
+            <div class="answer-option">
+            <input type="radio" name="answer" id="answer-c" value="C">
             <label for="answer-c">${displayQuestion.optionC}</label><br>
-                <input type="radio" name="answer" id="answer-d" value="D">
-            <label for="answer-d">${displayQuestion.optionD}</label><br>
+            </div>
+            <div class="answer-option">
+            <input type="radio" name="answer" id="answer-d" value="D">
+            <label for="answer-d">${displayQuestion.optionD}</label>
+            </div>
             `;
 }
 
 function renderQuizResultPage() {
-    let stringToDisplay = "<h2>Quiz Results</h2><p>You've completed the quiz. Here are your final results:</p><p>You answered "+QUIZSTATUS.numberAnswersCorrect+" out of 10 questions correctly.</p><p>Feel free to take the quiz over again by clicking the Retake Quiz button.</p><button class=\"quiz-retake\"><span class=\"button-label\">RETAKE QUIZ</span></button>";
-    $("#js-quiz-form").html(stringToDisplay);
+    let stringToDisplay = "<h2>Quiz Results</h2><p>You've completed the quiz. Here are your final results:</p><p>You answered " + QUIZSTATUS.numberAnswersCorrect + " out of 10 questions correctly.</p><p>Feel free to take the quiz over again by clicking the Retake Quiz button.</p><button class=\"quiz-retake\"><span class=\"button-label\">RETAKE QUIZ</span></button>";
+    $("#js-quiz-app").html(stringToDisplay);
 }
 
 function handleDisplayQuestion() {
     let questionID = QUIZSTATUS.currentQuestion;
-    if(questionID<=10){
-        let stringToDisplay = "<section class=\"score-tracker\"><p>Current Score</p><p>"+QUIZSTATUS.numberAnswersCorrect+" Correct</p><p>"+QUIZSTATUS.numberAnswersIncorrect+" Incorrect</p></section>";
-        stringToDisplay += "<div class=\"question-count\"><p>Question "+questionID+" of 10</p></div><h2>Question "+questionID+"</h2>";
+    if (questionID <= 10) {
+        let stringToDisplay = "<section class=\"score-tracker\"><p>Current Score</p><p>" + QUIZSTATUS.numberAnswersCorrect + " Correct</p><p>" + QUIZSTATUS.numberAnswersIncorrect + " Incorrect</p></section>";
+        stringToDisplay += "<div class=\"question-count\"><p>Question " + questionID + " of 10</p></div><h2>Question " + questionID + "</h2>";
+        stringToDisplay += "<form id=\"js-quiz-form\">"
         stringToDisplay += generateQuizQuestion(questionID, QUIZQUESTIONS);
         stringToDisplay += "<button type=\"submit\"><span class=\"button-label\">SUBMIT ANSWER</span></button>";
-        $("#js-quiz-form").html(stringToDisplay);
+        stringToDisplay += "</form>";
+        $("#js-quiz-app").html(stringToDisplay);
     } else {
-        alert("all done!");
+        renderQuizResultsPage();
     }
 }
 
 function handleQuizQuestionAnswerSubmission() {
-    $('#js-quiz-form').submit(function(event) {
+    $('#js-quiz-app').submit(function (event) {
         event.preventDefault();
         const submittedAnswer = $("input[type=radio][name=answer]:checked").val();
         let submittedID = $('#questionID').val();
         let submittedQuestion = QUIZQUESTIONS.find(question => question.id == submittedID);
-        if(submittedAnswer == submittedQuestion.answer){
+        if (submittedAnswer == submittedQuestion.answer) {
             QUIZSTATUS.currentQuestion++;
             QUIZSTATUS.numberAnswersCorrect++;
             handleDisplayQuestion();
@@ -151,19 +161,32 @@ function handleQuizQuestionAnswerSubmission() {
             handleDisplayQuestion();
         }
     });
-    // if answer ==
 }
 
 // display the starting page for the quiz app
 function renderQuizStartPage() {
-    let stringToDisplay = "<h2>Welcome</h2><p>Welcome to Better Know Wisconsin - a short, 10 question quiz that will test your knowledge about the great state of Wisconsin.</p><p>Think you know everything there is to know about Wisconsin? Let's find out. Click the Start Quiz button below to begin.</p><div class=\"quiz-controls\"><button class=\"quiz-start\"><span class=\"button-label\">START QUIZ</span></button></div>";
-    $("#js-quiz-form").html(stringToDisplay);
+    let stringToDisplay = "<h2>Welcome</h2><p>Welcome to Better Know Wisconsin - a short, 10 question quiz that will test your knowledge about the great state of Wisconsin.</p><p>Think you know everything there is to know about Wisconsin? Let's find out. Click the Start Quiz button below to begin.</p><div class=\"quiz-controls\"><button class=\"quiz-start\">START QUIZ</button></div>";
+    $("#js-quiz-app").html(stringToDisplay);
+}
+
+function renderQuizResultsPage() {
+    let stringToDisplay = "<h2>Quiz Results</h2><p>You've completed the quiz. Here are your final results:</p><p>You answered " + QUIZSTATUS.numberAnswersCorrect + " out of 10 questions correctly.</p><p>Feel free to take the quiz over again by clicking the Retake Quiz button.</p><div class=\"quiz-controls\"><button class=\"quiz-retake\">RETAKE QUIZ</button></div>";
+    $("#js-quiz-app").html(stringToDisplay);
+}
+
+// display the first quiz question when they click the RETAKE QUIZ button
+function handleRetakeQuizClicked() {
+    $('#js-quiz-app').on('click', '.quiz-retake', function () {
+        QUIZSTATUS.currentQuestion = 0;
+        QUIZSTATUS.numberAnswersCorrect = 0;
+        QUIZSTATUS.numberAnswersIncorrect = 0;
+        renderQuizStartPage();
+    });
 }
 
 // display the first quiz question when they click the START QUIZ button
 function handleStartQuizClicked() {
-    // like in `handleItemCheckClicked`, we use event delegation
-    $('.quiz-controls').on('click', '.quiz-start', function () {
+    $('#js-quiz-app').on('click', '.quiz-start', function () {
         QUIZSTATUS.currentQuestion++;
         handleDisplayQuestion();
     });
@@ -176,6 +199,7 @@ function handleQuiz() {
     renderQuizStartPage();
     handleStartQuizClicked();
     handleQuizQuestionAnswerSubmission();
+    handleRetakeQuizClicked();
 }
 
 /*
