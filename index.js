@@ -130,15 +130,24 @@ function renderQuizResultPage() {
     $("#js-quiz-app").html(stringToDisplay);
 }
 
+function renderScoreTracker() {
+    return("<section class=\"score-tracker\"><p>Current Score</p><p>" + QUIZSTATUS.numberAnswersCorrect + " Correct</p><p>" + QUIZSTATUS.numberAnswersIncorrect + " Incorrect</p></section>");
+}
+
+function renderQuizQuestionTracker(){
+    return("<div class=\"question-count\"><p>Question " + QUIZSTATUS.currentQuestion + " of 10</p></div>");
+}
+
 function handleDisplayQuestion() {
     let questionID = QUIZSTATUS.currentQuestion;
     if (questionID <= 10) {
-        let stringToDisplay = "<section class=\"score-tracker\"><p>Current Score</p><p>" + QUIZSTATUS.numberAnswersCorrect + " Correct</p><p>" + QUIZSTATUS.numberAnswersIncorrect + " Incorrect</p></section>";
-        stringToDisplay += "<div class=\"question-count\"><p>Question " + questionID + " of 10</p></div><h2>Question " + questionID + "</h2>";
+        let stringToDisplay = renderScoreTracker();
+        stringToDisplay += "<h2>Question " + QUIZSTATUS.currentQuestion + "</h2>";
         stringToDisplay += "<form id=\"js-quiz-form\">"
         stringToDisplay += generateQuizQuestion(questionID, QUIZQUESTIONS);
         stringToDisplay += "<button type=\"submit\"><span class=\"button-label\">SUBMIT ANSWER</span></button>";
         stringToDisplay += "</form>";
+        stringToDisplay += renderQuizQuestionTracker();
         $("#js-quiz-app").html(stringToDisplay);
     } else {
         renderQuizResultsPage();
@@ -150,22 +159,51 @@ function handleQuizQuestionAnswerSubmission() {
         event.preventDefault();
         const submittedAnswer = $("input[type=radio][name=answer]:checked").val();
         // if they don't select an answer, throw up an error message
-        if(submittedAnswer == undefined){
+        if (submittedAnswer == undefined) {
             alert("Please select an answer.")
         } else {
             let submittedID = $('#questionID').val();
             let submittedQuestion = QUIZQUESTIONS.find(question => question.id == submittedID);
+            let answerText = "";
+            switch (submittedQuestion.answer) {
+                case "A":
+                    answerText = submittedQuestion.optionA;
+                    break;
+                case "B":
+                    answerText = submittedQuestion.optionB;
+                    break;
+                case "C":
+                    answerText = submittedQuestion.optionC;
+                    break;
+                case "D":
+                    answerText = submittedQuestion.optionD;
+                    break;
+            }
             if (submittedAnswer == submittedQuestion.answer) {
-                QUIZSTATUS.currentQuestion++;
-                QUIZSTATUS.numberAnswersCorrect++;
-                handleDisplayQuestion();
+                renderCorrectResponsePage(answerText);
             } else {
-                QUIZSTATUS.currentQuestion++;
-                QUIZSTATUS.numberAnswersIncorrect++;
-                handleDisplayQuestion();
+                renderIncorrectResponsePage(answerText);
             }
         }
     });
+}
+
+function renderCorrectResponsePage(correctAnswerText) {
+    QUIZSTATUS.numberAnswersCorrect++;
+    let stringToDisplay = renderScoreTracker();
+    stringToDisplay += "<h2>Question " + QUIZSTATUS.currentQuestion + "</h2>";
+    stringToDisplay += "<p>Correct!</p><div class=\"quiz-controls\"><button class=\"quiz-continue\">CONTINUE</button></div>";
+    stringToDisplay += renderQuizQuestionTracker();
+    $("#js-quiz-app").html(stringToDisplay);
+}
+
+function renderIncorrectResponsePage(correctAnswerText) {
+    QUIZSTATUS.numberAnswersIncorrect++;
+    let stringToDisplay = renderScoreTracker();
+    stringToDisplay += "<h2>Question " + QUIZSTATUS.currentQuestion + "</h2>";
+    stringToDisplay += "<p>Incorrect. The correct answer was:</p><p>" + correctAnswerText + "<div class=\"quiz-controls\"><button class=\"quiz-continue\">CONTINUE</button></div>";
+    stringToDisplay += renderQuizQuestionTracker();
+    $("#js-quiz-app").html(stringToDisplay);
 }
 
 // display the starting page for the quiz app
@@ -189,6 +227,13 @@ function handleRetakeQuizClicked() {
     });
 }
 
+function handleContinueQuizClicked() {
+    $('#js-quiz-app').on('click', '.quiz-continue', function () {
+        QUIZSTATUS.currentQuestion++;
+        handleDisplayQuestion();
+    });
+}
+
 // display the first quiz question when they click the START QUIZ button
 function handleStartQuizClicked() {
     $('#js-quiz-app').on('click', '.quiz-start', function () {
@@ -205,6 +250,7 @@ function handleQuiz() {
     handleStartQuizClicked();
     handleQuizQuestionAnswerSubmission();
     handleRetakeQuizClicked();
+    handleContinueQuizClicked();
 }
 
 /*

@@ -21,9 +21,15 @@ header h1{
     float: left;
 }
 
+h2 {
+    clear: right;
+}
 main {
     width: 60%;
-    margin: 100px auto;
+    margin: auto;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 30px 0;
 }
 
 footer {
@@ -69,6 +75,7 @@ fieldset {
 }
 
 .question-count {
-    clear: both;
+    padding-top: 30px;
+    text-align: center;
 }
 
