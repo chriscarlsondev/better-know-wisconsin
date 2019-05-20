@@ -149,16 +149,21 @@ function handleQuizQuestionAnswerSubmission() {
     $('#js-quiz-app').submit(function (event) {
         event.preventDefault();
         const submittedAnswer = $("input[type=radio][name=answer]:checked").val();
-        let submittedID = $('#questionID').val();
-        let submittedQuestion = QUIZQUESTIONS.find(question => question.id == submittedID);
-        if (submittedAnswer == submittedQuestion.answer) {
-            QUIZSTATUS.currentQuestion++;
-            QUIZSTATUS.numberAnswersCorrect++;
-            handleDisplayQuestion();
+        // if they don't select an answer, throw up an error message
+        if(submittedAnswer == undefined){
+            alert("Please select an answer.")
         } else {
-            QUIZSTATUS.currentQuestion++;
-            QUIZSTATUS.numberAnswersIncorrect++;
-            handleDisplayQuestion();
+            let submittedID = $('#questionID').val();
+            let submittedQuestion = QUIZQUESTIONS.find(question => question.id == submittedID);
+            if (submittedAnswer == submittedQuestion.answer) {
+                QUIZSTATUS.currentQuestion++;
+                QUIZSTATUS.numberAnswersCorrect++;
+                handleDisplayQuestion();
+            } else {
+                QUIZSTATUS.currentQuestion++;
+                QUIZSTATUS.numberAnswersIncorrect++;
+                handleDisplayQuestion();
+            }
         }
     });
 }
