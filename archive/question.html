@@ -25,7 +25,7 @@
             <p>Question 8 of 10</p>
         </div>
         <h2>Question 8</h2>
-        <form class="quiz-form" action="/some-server-endpoint" method="post">
+        <form class="quiz-form" method="post">
             <fieldset>
                 <legend class="question">What is the Wisconsin state motto?</legend>
                 <input type="radio" name="answer" id="answer-a" value="a">
@@ -37,7 +37,9 @@
                 <input type="radio" name="answer" id="answer-d" value="d">
                 <label for="answer-d">State sovereignty, national union</label>
             </fieldset>
-            <button type="submit">Submit Answer</button>
+            <button class="quiz-submit-answer">
+                <span class="button-label">SUBMIT ANSWER</span>
+            </button>
         </form>
     </main>
     <footer>
