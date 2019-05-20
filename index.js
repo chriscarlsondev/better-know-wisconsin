@@ -1,5 +1,6 @@
 'use strict';
 
+// object used to store current status of quiz progress
 const QUIZSTATUS = {
     currentQuestion: 0,
     numberAnswersCorrect: 0,
@@ -126,19 +127,17 @@ function generateQuizQuestion(questionIDToDisplay, quizQuestions) {
             `;
 }
 
-function renderQuizResultPage() {
-    let stringToDisplay = "<h2>Quiz Results</h2><p>You've completed the quiz. Here are your final results:</p><p>You answered " + QUIZSTATUS.numberAnswersCorrect + " out of 10 questions correctly.</p><p>Feel free to take the quiz over again by clicking the Retake Quiz button.</p><button class=\"quiz-retake\"><span class=\"button-label\">RETAKE QUIZ</span></button>";
-    $("#js-quiz-app").html(stringToDisplay);
-}
-
+// displays the current number of correct or incorrect responses
 function renderScoreTracker() {
     return("<section class=\"score-tracker\"><p>Current Score</p><p>" + QUIZSTATUS.numberAnswersCorrect + " Correct</p><p>" + QUIZSTATUS.numberAnswersIncorrect + " Incorrect</p></section>");
 }
 
+// displays the current question number
 function renderQuizQuestionTracker(){
     return("<div class=\"question-count\"><p>Question <span class=\"current-question-number\">" + QUIZSTATUS.currentQuestion + "</span> of 10</p></div>");
 }
 
+// displays a question from the quiz
 function handleDisplayQuestion() {
     let questionID = QUIZSTATUS.currentQuestion;
     $("body").css("background-color","#eee");
@@ -156,6 +155,7 @@ function handleDisplayQuestion() {
     }
 }
 
+// determines if the submitted answer is correct
 function handleQuizQuestionAnswerSubmission() {
     $('#js-quiz-app').submit(function (event) {
         event.preventDefault();
@@ -190,6 +190,7 @@ function handleQuizQuestionAnswerSubmission() {
     });
 }
 
+// displays a page telling the user that they answered correctly
 function renderCorrectResponsePage(correctAnswerText) {
     QUIZSTATUS.numberAnswersCorrect++;
     let stringToDisplay = renderScoreTracker();
@@ -200,6 +201,7 @@ function renderCorrectResponsePage(correctAnswerText) {
     $("#js-quiz-app").html(stringToDisplay);
 }
 
+// displays a page telling the user that they answered incorrectly and provides the correct answer
 function renderIncorrectResponsePage(correctAnswerText) {
     QUIZSTATUS.numberAnswersIncorrect++;
     let stringToDisplay = renderScoreTracker();
@@ -216,6 +218,7 @@ function renderQuizStartPage() {
     $("#js-quiz-app").html(stringToDisplay);
 }
 
+// displays the quiz results page
 function renderQuizResultsPage() {
     let stringToDisplay = "<h2>Quiz Results</h2><p>You've completed the quiz. Here are your final results:</p><p>You answered " + QUIZSTATUS.numberAnswersCorrect + " out of 10 questions correctly.</p><p>Feel free to take the quiz over again by clicking the Retake Quiz button.</p><div class=\"quiz-controls\"><button class=\"quiz-retake\">RETAKE QUIZ</button></div>";
     $("#js-quiz-app").html(stringToDisplay);
@@ -248,7 +251,7 @@ function handleStartQuizClicked() {
 
 // this function will be our callback when the page loads. it's responsible for
 // initially rendering the quiz, and activating our individual functions
-// that handle quiz answer
+// that handle quiz answers
 function handleQuiz() {
     renderQuizStartPage();
     handleStartQuizClicked();
@@ -256,15 +259,6 @@ function handleQuiz() {
     handleRetakeQuizClicked();
     handleContinueQuizClicked();
 }
-
-/*
-default: display quiz start page, set current question = 0
-when they click start quiz, display the first question and its options
-when they click submit answer, check to see if they submitted the correct answer
-    if they were correct, state they were correct and provide them with a button to move to next question
-    if they were wrong, stage they were wrong, provide them with the correct answer, and provide them with a button to move to next question
-when they move on to the next question, increment question counter, display the current question and its options
-*/
 
 // when the page loads, call `handleQuiz`
 $(handleQuiz);
