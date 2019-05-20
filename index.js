@@ -108,20 +108,21 @@ function generateQuizQuestion(questionIDToDisplay, quizQuestions) {
                 <legend class="question">${displayQuestion.question}</legend>
                 <div class="answer-option">
                 <input type="radio" name="answer" id="answer-a" value="A">
-            <label for="answer-a">${displayQuestion.optionA}</label><br>
+            <label for="answer-a">${displayQuestion.optionA}</label>
             </div>
             <div class="answer-option">
             <input type="radio" name="answer" id="answer-b" value="B">
-            <label for="answer-b">${displayQuestion.optionB}</label><br>
+            <label for="answer-b">${displayQuestion.optionB}</label>
             </div>
             <div class="answer-option">
             <input type="radio" name="answer" id="answer-c" value="C">
-            <label for="answer-c">${displayQuestion.optionC}</label><br>
+            <label for="answer-c">${displayQuestion.optionC}</label>
             </div>
             <div class="answer-option">
             <input type="radio" name="answer" id="answer-d" value="D">
             <label for="answer-d">${displayQuestion.optionD}</label>
             </div>
+            </fieldset>
             `;
 }
 

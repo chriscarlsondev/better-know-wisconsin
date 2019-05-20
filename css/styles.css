@@ -5,7 +5,7 @@ body {
 
 
 header {
-    width: 60%;
+    width: 70%;
     margin: 50px auto;
 }
 
@@ -17,7 +17,7 @@ h2 {
     clear: right;
 }
 main {
-    width: 60%;
+    width: 70%;
     margin: auto;
     border-top: 1px solid #eee;
     border-bottom: 1px solid #eee;
@@ -25,16 +25,11 @@ main {
 }
 
 footer {
-    width: 60%;
+    width: 70%;
     margin: 50px auto;
     font-weight: 300;
     font-size: .9em;
     text-align: center;
-}
-
-input[type="radio"] {
-    margin-top: -1px;
-    vertical-align: middle;
 }
 
 .quiz-form {
@@ -42,14 +37,28 @@ input[type="radio"] {
 }
 
 label {
-    margin: 5px 0;
+    display: inline-block;
+    padding: 10px 50px 10px 0;
+}
+
+button {
+    margin-top: 20px;
+}
+
+legend {
+    margin: 20px 0;
 }
 
 .answer-option {
     display: inline-block;
-    padding: 20px 10px;
+    padding: 15px 10px;
     margin: 0 0;
     width: 100%;
+}
+
+.answer-option:hover {
+    background: #eee;
+    border-radius: 10px;
 }
 
 .score-tracker {
