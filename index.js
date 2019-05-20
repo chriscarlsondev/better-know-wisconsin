@@ -136,11 +136,12 @@ function renderScoreTracker() {
 }
 
 function renderQuizQuestionTracker(){
-    return("<div class=\"question-count\"><p>Question " + QUIZSTATUS.currentQuestion + " of 10</p></div>");
+    return("<div class=\"question-count\"><p>Question <span class=\"current-question-number\">" + QUIZSTATUS.currentQuestion + "</span> of 10</p></div>");
 }
 
 function handleDisplayQuestion() {
     let questionID = QUIZSTATUS.currentQuestion;
+    $("body").css("background-color","#eee");
     if (questionID <= 10) {
         let stringToDisplay = renderScoreTracker();
         stringToDisplay += "<h2>Question " + QUIZSTATUS.currentQuestion + "</h2>";
@@ -193,8 +194,9 @@ function renderCorrectResponsePage(correctAnswerText) {
     QUIZSTATUS.numberAnswersCorrect++;
     let stringToDisplay = renderScoreTracker();
     stringToDisplay += "<h2>Question " + QUIZSTATUS.currentQuestion + "</h2>";
-    stringToDisplay += "<p>Correct!</p><div class=\"quiz-controls\"><button class=\"quiz-continue\">CONTINUE</button></div>";
+    stringToDisplay += "<p><span class=\"correct-alert\">Correct</span>!</p><div class=\"quiz-controls\"><button class=\"quiz-continue\">CONTINUE</button></div>";
     stringToDisplay += renderQuizQuestionTracker();
+    $("body").css("background-color","limegreen");
     $("#js-quiz-app").html(stringToDisplay);
 }
 
@@ -202,8 +204,9 @@ function renderIncorrectResponsePage(correctAnswerText) {
     QUIZSTATUS.numberAnswersIncorrect++;
     let stringToDisplay = renderScoreTracker();
     stringToDisplay += "<h2>Question " + QUIZSTATUS.currentQuestion + "</h2>";
-    stringToDisplay += "<p>Incorrect. The correct answer was:</p><p>" + correctAnswerText + "<div class=\"quiz-controls\"><button class=\"quiz-continue\">CONTINUE</button></div>";
+    stringToDisplay += "<p><span class=\"incorrect-alert\">Incorrect</span>. The correct answer was:</p><p>" + correctAnswerText + "<div class=\"quiz-controls\"><button class=\"quiz-continue\">CONTINUE</button></div>";
     stringToDisplay += renderQuizQuestionTracker();
+    $("body").css("background-color","red");
     $("#js-quiz-app").html(stringToDisplay);
 }
 

@@ -1,35 +1,52 @@
-body {
-    font-family: 'Roboto', sans-serif;
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+    box-sizing: border-box;
 }
 
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
 
+body {
+    font-family: 'Roboto', sans-serif;
+    background: #eee;
+    margin-top: 100px;
+}
 
 header {
     width: 70%;
-    margin: 50px auto;
+    margin: 0 auto;
+    padding: 30px 30px;
+    background: #fff;
 }
 
-header h1{
+header h1 {
     float: left;
 }
 
 h2 {
     clear: right;
 }
+
 main {
     width: 70%;
     margin: auto;
     border-top: 1px solid #eee;
     border-bottom: 1px solid #eee;
-    padding: 30px 0;
+    padding: 30px 30px;
+    background: #fff;
 }
 
 footer {
     width: 70%;
-    margin: 50px auto;
+    margin: 0 auto;
+    padding: 30px 30px;
     font-weight: 300;
     font-size: .9em;
     text-align: center;
+    background: #fff;
 }
 
 .quiz-form {
@@ -74,7 +91,7 @@ fieldset {
     padding: 0;
 }
 
-.score-tracker p{
+.score-tracker p {
     margin: 0;
 }
 
@@ -83,3 +100,15 @@ fieldset {
     text-align: center;
 }
 
+.current-question-number {
+    background: #eee;
+    padding: 5px;
+}
+
+.incorrect-alert {
+    color: red;
+}
+
+.correct-alert {
+    color: limegreen;
+}
