@@ -14,7 +14,7 @@ body {
 
 header {
     width: 60%;
-    margin: 100px auto;
+    margin: 50px auto;
 }
 
 header h1{
@@ -34,7 +34,10 @@ main {
 
 footer {
     width: 60%;
-    margin: 100px auto;
+    margin: 50px auto;
+    font-weight: 300;
+    font-size: .9em;
+    text-align: center;
 }
 
 input[type="radio"] {
@@ -53,13 +56,13 @@ label {
 .answer-option {
     display: inline-block;
     padding: 20px 10px;
-    margin: 0 30px;
+    margin: 0 0;
     width: 100%;
 }
 
 .score-tracker {
     float: right;
-    margin: 10px;
+    margin: 50px 0;
     background: #eee;
     padding: 10px;
 }
