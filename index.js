@@ -140,7 +140,7 @@ function renderQuizQuestionTracker(){
 // displays a question from the quiz
 function handleDisplayQuestion() {
     let questionID = QUIZSTATUS.currentQuestion;
-    $("body").css("background-color","#eee");
+    $("body").css("background-color","#f7f7f7");
     if (questionID <= 10) {
         let stringToDisplay = renderScoreTracker();
         stringToDisplay += "<h2>Question " + QUIZSTATUS.currentQuestion + "</h2>";
@@ -195,7 +195,7 @@ function renderCorrectResponsePage(correctAnswerText) {
     QUIZSTATUS.numberAnswersCorrect++;
     let stringToDisplay = renderScoreTracker();
     stringToDisplay += "<h2>Question " + QUIZSTATUS.currentQuestion + "</h2>";
-    stringToDisplay += "<p><span class=\"correct-alert\">Correct</span>!</p><div class=\"quiz-controls\"><button class=\"quiz-continue\">CONTINUE</button></div>";
+    stringToDisplay += "<p><span class=\"correct-alert\">Correct</span>!</p><div class=\"quiz-controls\"><button class=\"quiz-continue\"><span class=\"button-label\">CONTINUE</span></button></div>";
     stringToDisplay += renderQuizQuestionTracker();
     $("body").css("background-color","limegreen");
     $("#js-quiz-app").html(stringToDisplay);
@@ -206,7 +206,7 @@ function renderIncorrectResponsePage(correctAnswerText) {
     QUIZSTATUS.numberAnswersIncorrect++;
     let stringToDisplay = renderScoreTracker();
     stringToDisplay += "<h2>Question " + QUIZSTATUS.currentQuestion + "</h2>";
-    stringToDisplay += "<p><span class=\"incorrect-alert\">Incorrect</span>. The correct answer was:</p><p>" + correctAnswerText + "<div class=\"quiz-controls\"><button class=\"quiz-continue\">CONTINUE</button></div>";
+    stringToDisplay += "<p><span class=\"incorrect-alert\">Incorrect</span>. The correct answer was:</p><p>" + correctAnswerText + "<div class=\"quiz-controls\"><button class=\"quiz-continue\"><span class=\"button-label\">CONTINUE</span></button></div>";
     stringToDisplay += renderQuizQuestionTracker();
     $("body").css("background-color","red");
     $("#js-quiz-app").html(stringToDisplay);
@@ -214,13 +214,13 @@ function renderIncorrectResponsePage(correctAnswerText) {
 
 // display the starting page for the quiz app
 function renderQuizStartPage() {
-    let stringToDisplay = "<h2>Welcome</h2><p>Welcome to Better Know Wisconsin - a short, 10 question quiz that will test your knowledge about the great state of Wisconsin.</p><p>Think you know everything there is to know about Wisconsin? Let's find out. Click the Start Quiz button below to begin.</p><div class=\"quiz-controls\"><button class=\"quiz-start\">START QUIZ</button></div>";
+    let stringToDisplay = "<h2>Welcome</h2><p>Welcome to Better Know Wisconsin - a short, 10 question quiz that will test your knowledge about the great state of Wisconsin. Think you know everything there is to know about Wisconsin? Let's find out.</p><p>Click the Start Quiz button below to begin.</p><div class=\"quiz-controls\"><button class=\"quiz-start\"><span class=\"button-label\">START QUIZ</span></button></div>";
     $("#js-quiz-app").html(stringToDisplay);
 }
 
 // displays the quiz results page
 function renderQuizResultsPage() {
-    let stringToDisplay = "<h2>Quiz Results</h2><p>You've completed the quiz. Here are your final results:</p><p>You answered " + QUIZSTATUS.numberAnswersCorrect + " out of 10 questions correctly.</p><p>Feel free to take the quiz over again by clicking the Retake Quiz button.</p><div class=\"quiz-controls\"><button class=\"quiz-retake\">RETAKE QUIZ</button></div>";
+    let stringToDisplay = "<h2>Quiz Results</h2><p>You've completed the quiz. Here are your final results:</p><p>You answered " + QUIZSTATUS.numberAnswersCorrect + " out of 10 questions correctly.</p><p>Feel free to take the quiz over again by clicking the Retake Quiz button.</p><div class=\"quiz-controls\"><button class=\"quiz-retake\"><span class=\"button-label\">RETAKE QUIZ</span></button></div>";
     $("#js-quiz-app").html(stringToDisplay);
 }
 
