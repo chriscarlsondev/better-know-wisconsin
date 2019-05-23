@@ -12,13 +12,13 @@ html {
 body {
     font-family: 'Roboto', sans-serif;
     background: #f7f7f7;
-    margin-top: 100px;
 }
 
 header {
-    width: 70%;
+    width: 95%;
     margin: 0 auto;
-    padding: 30px 30px;
+    padding: 10px;
+    max-width: 700px;
     background: #fff;
 }
 
@@ -31,22 +31,24 @@ h2 {
 }
 
 main {
-    width: 70%;
+    width: 95%;
     margin: auto;
     border-top: 1px solid #f7f7f7;
     border-bottom: 1px solid #f7f7f7;
-    padding: 30px;
+    padding: 5px;
+    max-width: 700px;
     background: #fff;
 }
 
 footer {
-    width: 70%;
+    width: 95%;
     margin: 0 auto;
-    padding: 30px 30px;
+    padding: 5px;
     font-weight: 300;
     font-size: .9em;
     text-align: center;
     background: #fff;
+    max-width: 700px;
 }
 
 .quiz-form {
@@ -80,7 +82,7 @@ legend {
 
 .answer-option {
     display: inline-block;
-    padding: 15px 10px;
+    padding: 5px 10px;
     margin: 0 0;
     width: 100%;
 }
@@ -92,7 +94,7 @@ legend {
 
 .score-tracker {
     float: right;
-    margin: 50px 0;
+    margin: 5px 0;
     background: #f7f7f7;
     padding: 10px;
 }
@@ -104,14 +106,13 @@ fieldset {
 }
 
 
-
 .score-tracker p {
     margin: 0;
     padding: 5px 40px 5px 5px;
 }
 
 .question-count {
-    padding-top: 30px;
+    padding-top: 5px;
     text-align: center;
 }
 
